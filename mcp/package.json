@@ -1,0 +1,13 @@
+{
+  "name": "chrome-tap-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.js",
+  "bin": {
+    "chrome-tap-mcp": "./index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "ws": "^8.18.0"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "chrome-tap-host",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

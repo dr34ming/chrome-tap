@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "chrome-tap",
+  "version": "0.1.0",
+  "description": "Expose Chrome DevTools Protocol over local WebSocket",
+  "permissions": ["debugger", "nativeMessaging", "tabs"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "chrome-tap"
+  },
+  "icons": {}
+}

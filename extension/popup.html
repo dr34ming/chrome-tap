@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <h1>chrome-tap</h1>
+  <div id="status" class="status disconnected">Checking...</div>
+  <div id="token-section" style="display:none">
+    <label>Token</label>
+    <div class="token-row">
+      <code id="token">-</code>
+      <button id="copy-btn">Copy</button>
+    </div>
+  </div>
+  <div id="tabs-section" style="display:none">
+    <label>Attached tabs</label>
+    <ul id="tab-list"></ul>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
