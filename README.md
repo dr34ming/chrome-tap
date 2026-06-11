@@ -80,6 +80,32 @@ Tools: `list_targets`, `attach`, `detach`, `cdp_send`
 
 Meta commands use `chrome-tap.*` namespace. Everything else passes through as raw CDP.
 
+## Event throttling
+
+Noisy domains (`Console.enable`, `Network.enable`) can emit 100k+ events and
+overwhelm a slow client. Throttling is **opt-in** — by default you get the raw
+firehose. Pass `eventThrottle` to `chrome-tap.attach`, mapping a CDP event
+method (or `"*"` wildcard) to a max events/sec:
+
+```json
+{"id":2,"method":"chrome-tap.attach","params":{
+  "tabId":123,
+  "eventThrottle":{"Console.messageAdded":50,"Network.dataReceived":100,"*":200}
+}}
+```
+
+Events over the cap (per 1s window, per method) are dropped newest-first. An
+explicit method overrides `"*"`. Drops are never silent — every 100ms the host
+sends a notice with the count dropped since the last flush:
+
+```json
+{"type":"event","method":"chrome-tap.throttled","params":{"dropped":{"Console.messageAdded":312}}}
+```
+
+A throttled client whose WS send buffer backs up past 4MB also has its events
+dropped (and counted) until the buffer drains, so one slow consumer can't stall
+the host.
+
 ## Config
 
 | Env var | Default | Description |
